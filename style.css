@@ -1,0 +1,278 @@
+/* General Reset and Styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* A clean, modern font */
+    background-color: #f7f9fc; /* Very light, nearly white background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    color: #333;
+}
+
+/* --- Main Container (The Card) --- */
+.weather-container {
+    background-color: #ffffff;
+    border-radius: 12px; /* Slightly more subtle radius */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Soft, subtle shadow */
+    padding: 30px 40px;
+    width: 850px; 
+    
+    /* Using CSS Grid for the main layout to match the visual blocks */
+    display: grid;
+    grid-template-areas: 
+        "city graph"
+        "main graph"
+        "details forecast";
+    /* Left column is narrower, matching the image */
+    grid-template-columns: 350px 1fr; 
+    grid-template-rows: auto auto 1fr;
+    gap: 15px 40px;
+}
+
+/* --- 1. City Input & Date/Time --- */
+.city-input {
+    grid-area: city;
+}
+
+.city-input label {
+    display: block;
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.city-input input {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px 10px;
+    font-size: 16px;
+    width: 200px;
+    outline: none;
+    color: #333;
+}
+
+.date-time {
+    color: #777;
+    font-size: 14px;
+    margin: 25px 0 35px 0; /* Adjusted vertical spacing */
+    grid-area: date;
+}
+
+/* --- 2. Main Weather Info (Left Side) --- */
+.main-info {
+    grid-area: main;
+    padding-left: 0; /* Resetting potential padding */
+    position: relative;
+    top: -20px; /* Shift up slightly for a better visual match */
+}
+
+.current-weather {
+    /* Aligning the icon, temp, and description */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.icon-temp {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+/* Using a class for the weather icon for better control */
+.weather-icon {
+    font-size: 75px; 
+    color: #333; /* Dark icon */
+    line-height: 1;
+    margin-right: 15px;
+}
+
+.temperature {
+    font-size: 72px; 
+    font-weight: 500; /* Lighter than bold */
+    line-height: 1;
+}
+
+.temp-unit {
+    font-size: 24px;
+    align-self: flex-start;
+    margin-top: 5px;
+    font-weight: normal;
+    color: #555;
+}
+
+.condition {
+    font-size: 24px;
+    font-weight: 600; 
+    color: #333;
+    margin-left: 0; 
+    margin-top: -10px;
+}
+
+/* --- 3. Weather Details (Humidity/Wind) --- */
+.weather-details {
+    grid-area: details;
+    display: flex;
+    justify-content: space-between;
+    width: 280px; /* Constrain width to match main info block */
+    padding-top: 20px;
+    margin-top: 10px;
+}
+
+.detail {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.detail span:first-child {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 5px;
+}
+
+.detail span:last-child {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* --- 4. Temperature Graph (Top Right) --- */
+.temp-chart-section {
+    grid-area: graph;
+    padding-top: 20px;
+}
+
+.chart-temp-label {
+    font-size: 14px;
+    color: #555;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* The Graph Placeholder Area */
+.temp-chart {
+    background: #ffffff; /* White background */
+    border-radius: 10px;
+    height: 250px; /* Increased height for better visual space */
+    position: relative;
+    overflow: hidden;
+}
+
+/* --- Graph Visual Detail (The Curve and Shading) --- */
+
+/* The Blue Gradient Area (Shading) */
+.temp-chart::before {
+    content: '';
+    position: absolute;
+    top: 50px; /* Starting point of the curve */
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* Soft blue gradient for the fill area */
+    background: linear-gradient(to top, rgba(66, 165, 245, 0.1) 0%, rgba(66, 165, 245, 0.0) 100%);
+    /* This clip-path attempts to mimic the curved bottom edge of the shade */
+    clip-path: polygon(0 100%, 100% 100%, 100% 70%, 75% 85%, 50% 75%, 25% 90%, 0 80%);
+}
+
+/* The Blue Line (Curve) */
+.temp-chart::after {
+    content: '';
+    position: absolute;
+    top: 45px;
+    left: -5%; 
+    right: -5%;
+    height: 200%;
+    border-radius: 50%; /* Used to create a smooth, large curve */
+    background-color: transparent;
+    border-top: 2.5px solid #42A5F5; /* Primary blue line */
+    opacity: 1;
+}
+
+/* Temperature Text and Dot on the Graph */
+.temp-chart-text {
+    position: absolute;
+    top: 30px;
+    left: 20px;
+    color: #42A5F5;
+    font-size: 22px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+
+.temp-chart-text::before {
+    content: '•'; /* The small blue dot */
+    font-size: 40px;
+    line-height: 0.5;
+    margin-right: 5px;
+    position: relative;
+    top: 2px;
+}
+
+
+/* --- 5. 4-Day Forecast (Bottom Right) --- */
+.forecast-section {
+    grid-area: forecast;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+}
+
+.forecast-day {
+    flex: 1;
+    text-align: center;
+    padding: 20px 0 10px 0; /* Vertical padding adjusted */
+    border-radius: 10px;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 100px; /* Ensure boxes are wide enough */
+}
+
+/* Highlighted "Today" Box - EXACT Match */
+.forecast-day.active {
+    background-color: #42A5F5; 
+    color: white;
+    box-shadow: 0 6px 15px rgba(66, 165, 245, 0.3);
+}
+
+.forecast-day p {
+    font-weight: 500;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.forecast-day-icon {
+    font-size: 30px; /* Icon size */
+    margin-bottom: 10px;
+    display: block;
+}
+
+.forecast-day.active .forecast-day-icon {
+    color: white; /* White icon for the active day */
+}
+
+.forecast-day-humidity {
+    font-size: 14px;
+    font-weight: 600;
+    color: #555;
+}
+
+.forecast-day.active .forecast-day-humidity {
+    color: white; /* White humidity for the active day */
+}
+
+.forecast-temp {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 5px 0;
+  color: #333;
+}
+
+.forecast-day.active .forecast-temp {
+  color: white;
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Weather Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="weather-container">
+    <div class="city-input">
+      <label>Your city</label>
+      <input type="text" id="city-name" value="London">
+    </div>
+
+    <div class="date-time" id="date-time"></div>
+
+    <div class="main-info">
+      <div class="current-weather">
+        <div class="icon-temp">
+          <span class="weather-icon" id="weather-icon">☁️</span>
+          <span class="temperature" id="current-temp">72</span>
+          <span class="temp-unit">°C</span>
+        </div>
+        <p class="condition" id="current-condition">Cloudy</p>
+      </div>
+    </div>
+
+    <div class="weather-details">
+      <div class="detail">
+        <span>Humidity</span>
+        <span id="current-humidity">45%</span>
+      </div>
+      <div class="detail">
+        <span>Wind speed</span>
+        <span id="current-wind">19 km/h</span>
+      </div>
+    </div>
+
+    <div class="temp-chart-section">
+      <span class="chart-temp-label">Temperature</span>
+      <div class="temp-chart">
+        <div class="temp-chart-text" id="chart-temp-label">72°C</div>
+      </div>
+    </div>
+
+    <div class="forecast-section" id="forecast"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
